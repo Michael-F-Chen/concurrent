@@ -7,11 +7,12 @@ import java.util.concurrent.FutureTask;
 import com.ntc.concurrent.util.Tool;
 
 /**
- * 创建线程的几种方式
- * <li>继承 Thread类 （java是单继承的，所以需要有以下两个接口）</li>
- * <li>实现 Runnable接口（无返回值，可以直接交给Thread执行）</li>
- * <li>实现 Callable接口 （有返回值，需要FutureTask类包装交给Thread类执行）</li>
- * 
+ * <h2>创建线程的几种方式</h2>
+ * <ul>
+ * 		<li>继承 Thread类 （java是单继承的，所以需要有以下两个接口）</li>
+ * 		<li>实现 Runnable接口（无返回值，可以直接交给Thread执行）</li>
+ *  	<li>实现 Callable接口 （有返回值，需要FutureTask类包装交给Thread类执行）</li>
+ * </ul>
  * @author Michael-Chen
  */
 public class CreatThread {
