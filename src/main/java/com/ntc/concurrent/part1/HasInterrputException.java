@@ -33,15 +33,15 @@ public class HasInterrputException {
 			String threadName = Thread.currentThread().getName();
 			
 			while (!isInterrupted()) {
-				System.out.println(Tool.nowTime(threadName + " is running."));
+				System.out.println(Tool.time() + threadName + " is running.");
 				try {
-					System.out.println(Tool.nowTime("HasInterrputEx sleep 100 milliseconds start."));
+					System.out.println(Tool.time() + "HasInterrputEx sleep 100 milliseconds start.");
 					Thread.sleep(100);
-					System.out.println(Tool.nowTime("HasInterrputEx sleep 100 milliseconds end."));
+					System.out.println(Tool.time() + "HasInterrputEx sleep 100 milliseconds end.");
 				} catch (InterruptedException e) {
-					System.out.println(Tool.nowTime("[InterruptedException] " + threadName + " interrupt falg is " + isInterrupted()));
+					System.out.println(Tool.time() + "[InterruptedException] " + threadName + " interrupt falg is " + isInterrupted());
 					
-					System.out.println(Tool.nowTime("[InterruptedException] use interrupt()"));
+					System.out.println(Tool.time() + "[InterruptedException] use interrupt()");
 					// InterruptedException异常，会将停止标志位复位为 false，需手动停止此线程
 					interrupt();
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class HasInterrputException {
 			}
 			
 			// 不在catch中调用interrupt()，这里不会执行
-			System.out.println(Tool.nowTime(threadName + " interrupt falg is " + isInterrupted()));
+			System.out.println(Tool.time() + threadName + " interrupt falg is " + isInterrupted());
 		}
 		
 	}
@@ -72,14 +72,14 @@ public class HasInterrputException {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		Thread endThread = new UseThread("HasInterrputEx");
-		System.out.println(Tool.nowTime("start HasInterrputEx."));
+		System.out.println(Tool.time() + "start HasInterrputEx.");
 		endThread.start();
 		
-		System.out.println(Tool.nowTime("mainTread sleep 1 milliseconds begin."));
+		System.out.println(Tool.time() + "mainTread sleep 1 milliseconds begin.");
 		Thread.sleep(1);
-		System.out.println(Tool.nowTime("mainTread sleep 1 milliseconds end."));
+		System.out.println(Tool.time() + "mainTread sleep 1 milliseconds end.");
 		
-		System.out.println(Tool.nowTime("*** HasInterrputEx interrupt ***"));
+		System.out.println(Tool.time() + "*** HasInterrputEx interrupt ***");
 		endThread.interrupt();
 	}
 }

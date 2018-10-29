@@ -30,7 +30,7 @@ public class OnlyMain {
 		ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
 		ThreadInfo[] dumpAllThreads = threadMXBean.dumpAllThreads(false, false);
 		for (ThreadInfo threadInfo : dumpAllThreads) {
-			System.out.println(Tool.parentheses(threadInfo.getThreadId()+"") + " " +threadInfo.getThreadName());
+			System.out.println(Tool.time() + Tool.tips(threadInfo.getThreadId()+"") + threadInfo.getThreadName());
 		}
 		
 	}

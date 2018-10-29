@@ -47,10 +47,10 @@ public class EndThread {
 			
 			// 如果不理会interrupted(),线程是不会停止的。
 			//while (true) {
-				System.out.println(Tool.nowTime(threadName + " is running."));
+				System.out.println(Tool.time() + threadName + " is running.");
 			}
 			
-			System.out.println(Tool.nowTime(threadName + " interrupt falg is " + isInterrupted()));
+			System.out.println(Tool.time() + threadName + " interrupt falg is " + isInterrupted());
 		}
 		
 	}
@@ -70,10 +70,10 @@ public class EndThread {
 			
 			// 如果不理会interrupted(),线程是不会停止的。
 			//while (true) {
-				System.out.println(Tool.nowTime(threadName + " is running."));
+				System.out.println(Tool.time() + threadName + " is running.");
 			}
 			
-			System.out.println(Tool.nowTime(threadName + " interrupt falg is " + Thread.currentThread().isInterrupted()));
+			System.out.println(Tool.time() +threadName + " interrupt falg is " + Thread.currentThread().isInterrupted());
 		}
 
 	}
@@ -105,20 +105,20 @@ public class EndThread {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		Thread endThread = new UseThread("endTread");
-		System.out.println(Tool.nowTime("start endTread."));
+		System.out.println(Tool.time() + "start endTread.");
 		endThread.start();
 		
 		// 实现runable接口的方法，需要使用Thread类包装
 		UseRun useRun = new UseRun();
 		Thread useRunThread = new Thread(useRun,"useRunThread");
-		System.out.println(Tool.nowTime("start useRunThread."));
+		System.out.println(Tool.time() + "start useRunThread.");
 		useRunThread.start();
 		
-		System.out.println(Tool.nowTime("mainTread sleep 1 milliseconds begin."));
+		System.out.println(Tool.time() + "mainTread sleep 1 milliseconds begin.");
 		Thread.sleep(1);
-		System.out.println(Tool.nowTime("mainTread sleep 1 milliseconds end."));
+		System.out.println(Tool.time() + "mainTread sleep 1 milliseconds end.");
 		
-		System.out.println(Tool.nowTime("*** Tread interrupt ***"));
+		System.out.println(Tool.time() + "*** Tread interrupt ***");
 		endThread.interrupt();
 		useRunThread.interrupt();
 		

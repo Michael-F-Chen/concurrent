@@ -25,7 +25,7 @@ public class CreatThread {
 	private static class UseRun implements Runnable {
 
 		public void run() {
-			System.out.println(Tool.nowTime("实现Runnable的线程"));
+			System.out.println(Tool.time() + "实现Runnable的线程");
 		}
 
 	}
@@ -37,7 +37,7 @@ public class CreatThread {
 	private static class UseCall implements Callable<String> {
 
 		public String call() throws Exception {
-			System.out.println(Tool.nowTime("实现Callable的线程"));
+			System.out.println(Tool.time() + "实现Callable的线程");
 			return "CallResult";
 		}
 
@@ -50,7 +50,7 @@ public class CreatThread {
 	private static class UseThread extends Thread {
 		
 		public void start() {
-			System.out.println(Tool.nowTime("继承自Thread的线程"));
+			System.out.println(Tool.time() + "继承自Thread的线程");
 		}
 	}
 	
