@@ -1,10 +1,10 @@
-package com.ntc.concurrent.util;
+package com.ntc.concurrent.util.tool;
 
 /**
  * 工具类
  * @author Michael-Chen
  */
-public class Tool {
+public class LogTool {
 
 	public static String tips(String value) {
 		return "[ "+ value +" ] ";

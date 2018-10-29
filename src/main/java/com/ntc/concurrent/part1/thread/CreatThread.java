@@ -1,10 +1,10 @@
-package com.ntc.concurrent.part1;
+package com.ntc.concurrent.part1.thread;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-import com.ntc.concurrent.util.Tool;
+import com.ntc.concurrent.util.tool.LogTool;
 
 /**
  * <h2>创建线程的几种方式</h2>
@@ -25,7 +25,7 @@ public class CreatThread {
 	private static class UseRun implements Runnable {
 
 		public void run() {
-			System.out.println(Tool.time() + "实现Runnable的线程");
+			System.out.println(LogTool.time() + "实现Runnable的线程");
 		}
 
 	}
@@ -37,7 +37,7 @@ public class CreatThread {
 	private static class UseCall implements Callable<String> {
 
 		public String call() throws Exception {
-			System.out.println(Tool.time() + "实现Callable的线程");
+			System.out.println(LogTool.time() + "实现Callable的线程");
 			return "CallResult";
 		}
 
@@ -50,7 +50,7 @@ public class CreatThread {
 	private static class UseThread extends Thread {
 		
 		public void start() {
-			System.out.println(Tool.time() + "继承自Thread的线程");
+			System.out.println(LogTool.time() + "继承自Thread的线程");
 		}
 	}
 	

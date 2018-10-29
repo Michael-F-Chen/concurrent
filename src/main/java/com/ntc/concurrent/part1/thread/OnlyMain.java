@@ -1,10 +1,10 @@
-package com.ntc.concurrent.part1;
+package com.ntc.concurrent.part1.thread;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 
-import com.ntc.concurrent.util.Tool;
+import com.ntc.concurrent.util.tool.LogTool;
 
 /**
  * 测试只运行main方法时，产生的线程数
@@ -30,7 +30,7 @@ public class OnlyMain {
 		ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
 		ThreadInfo[] dumpAllThreads = threadMXBean.dumpAllThreads(false, false);
 		for (ThreadInfo threadInfo : dumpAllThreads) {
-			System.out.println(Tool.time() + Tool.tips(threadInfo.getThreadId()+"") + threadInfo.getThreadName());
+			System.out.println(LogTool.time() + LogTool.tips(threadInfo.getThreadId()+"") + threadInfo.getThreadName());
 		}
 		
 	}

@@ -1,16 +1,16 @@
-package com.ntc.concurrent.part1;
+package com.ntc.concurrent.part1.thread;
 
-import com.ntc.concurrent.util.Tool;
+import com.ntc.concurrent.util.tool.LogTool;
 
 /**
  * <h2>开始线程</h2>
  * <p>star()和run()的区别</p>
  * <ul>
  *		<li>
- *			 run()是调用对象的普通方法
+ *			 run()是调用对象的普通方法，<b style="color:red">由谁去调用，就归属用哪个线程</b>
  * 		</li>
  *  	<li>
- *			start()会将线程对象和操作系统中实际的线程进行映射，再执行run()方法
+ *			start()会将线程对象和操作系统中实际的线程进行映射<b style="color:red"> 即一个新线程</b>，再执行run()方法
  * 		</li>
  * </ul>
  * @author Michael-Chen
@@ -29,7 +29,7 @@ public class StartAndRun {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println(Tool.time() + "I am " + Tool.tips(Thread.currentThread().getName()));
+				System.out.println(LogTool.time() + "I am " + LogTool.tips(Thread.currentThread().getName()));
 				i--;
 			}
 		}
@@ -58,7 +58,7 @@ public class StartAndRun {
 		beCalledThread.run();	 
 		
 		// 调用start()方法后，会将线程对象和操作系统中实际的线程进行映射，再执行run()方法
-		//  [ Time = 1540819431115 ] ====> I am [ BeCalledThread ]
+		// [ Time = 1540819431115 ] ====> I am [ BeCalledThread ]
 		beCalledThread.start();	
 		
 	}
