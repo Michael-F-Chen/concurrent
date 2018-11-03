@@ -1,6 +1,7 @@
 package com.ntc.concurrent.part1.thread;
 
 /**
+ * 线程A中，执行线程B的jion方法，线程A必须等待线程B执行完成以后，才能继续自己的工作。
  * @author Michael-Chen
  */
 public class UseJion {

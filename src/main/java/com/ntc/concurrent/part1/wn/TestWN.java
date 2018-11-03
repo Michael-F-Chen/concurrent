@@ -2,6 +2,12 @@ package com.ntc.concurrent.part1.wn;
 
 /**
  * 演示notify()和notifyAll()的区别
+ * <ul>
+ * <li>线程在执行yield()方法以后，持有的锁是不释放的。</li>
+ * <li>sleep()方法被调用以后，持有的锁是不释放的。</li>
+ * <li>调用方法前，必须要持有锁，调用了wait()方法以后，所就会被释放，当wait()方法返回的时候，线程会重新持有锁。</li>
+ * <li>调用方法前，必须要持有锁，调用notify()方法本身不会释放锁，要等notify()之后的语句执行完，才会释放锁，所有一般将notify()方法写在方法的最后一行。</li>
+ * </ul>
  * @author Michael-Chen
  */
 public class TestWN {
