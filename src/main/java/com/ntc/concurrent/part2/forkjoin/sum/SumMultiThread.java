@@ -7,7 +7,7 @@ import com.ntc.concurrent.util.tool.LogTool;
 import com.ntc.concurrent.util.tool.SleepTools;
 
 /**
- * <h2>使用ForkJoin</h2>
+ * <h2>分而治之算法，使用ForkJoin（同步方法，演示返回结果值）</h2>
  * <ul>
  * <li>使用ForkJoin工具，将相同的问题，递归切分成若干份求解，再汇总。</li>
  * <li>注意点：阈值的使用，不是固定的，要根据具体情况进行分析</li>
@@ -16,7 +16,7 @@ import com.ntc.concurrent.util.tool.SleepTools;
  * @author Michael-Chen
  */
 public class SumMultiThread {
-	
+	// RecursiveTask 有返回值
     private static class SumTask extends RecursiveTask<Integer>{
 
         private static final long serialVersionUID = -8831823105847709816L;
@@ -48,6 +48,7 @@ public class SumMultiThread {
 			}else {
 				// 当计算范围大于等于阈值，再次从中间拆分，用递归处理拆分的任务
 				// fromIndex....mid....toIndex
+				// 不一定非要从中间切分，可以更具实际情况判断
 				// 1............70.....100
 				int mid = (fromIndex+toIndex)/2;
 				SumTask left = new SumTask(src, fromIndex, mid);
@@ -81,7 +82,7 @@ The count is 24186586 spend time:1007ms
         long start = System.currentTimeMillis();
         
         System.out.println(LogTool.time() + "SumMultiThread start.");
-        // 执行任务
+        // 执行任务(此方法为，同步调用)
         pool.invoke(innerFind);
         System.out.println(LogTool.time() + "SumMultiThread end.");
         System.out.println("The count is "+innerFind.join()
