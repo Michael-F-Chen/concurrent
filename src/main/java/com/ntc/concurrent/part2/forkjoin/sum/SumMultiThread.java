@@ -6,6 +6,15 @@ import java.util.concurrent.RecursiveTask;
 import com.ntc.concurrent.util.tool.LogTool;
 import com.ntc.concurrent.util.tool.SleepTools;
 
+/**
+ * <h2>使用ForkJoin</h2>
+ * <ul>
+ * <li>使用ForkJoin工具，将相同的问题，递归切分成若干份求解，再汇总。</li>
+ * <li>注意点：阈值的使用，不是固定的，要根据具体情况进行分析</li>
+ * <li>注意点：当样本值过小，使用多线程，效率可能比单线程慢（因为时间片理论转时，多线程上下文切换，会消耗一定的资源）</li>
+ * </ul>
+ * @author Michael-Chen
+ */
 public class SumMultiThread {
 	
     private static class SumTask extends RecursiveTask<Integer>{
