@@ -8,9 +8,11 @@ import com.ntc.concurrent.util.tool.SleepTools;
 /**
  * <h2>CountDownLatch</h2>
  * <ul>
- * <li>CountDownLatch类似升级版join</li>
+ * <li>CountDownLatch是一组线程等待其他线程完成工作后执行（和CyclicBarrier的主要区别），类似加强版join</li>
  * <li>CountDownLatch需要定于扣除点个数，当某线程使用await()方法时，需要等待预定的扣除点都被扣除完，线程才会继续执行。</li>
  * <li>一个线程可以使用使用多个countDown(),以消耗扣除点</li>
+ * <li>CountDownLatch放行由第三者控制,放行条件》=线程数</li>
+ * <li>应用场景：启动某个服务前，需要先启动若干个外部服务</li>
  * </ul>
  * @author Michael-Chen
  */
