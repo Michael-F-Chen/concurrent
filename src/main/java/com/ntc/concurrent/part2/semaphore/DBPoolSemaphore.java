@@ -52,6 +52,7 @@ public class DBPoolSemaphore {
 	
 	// 从DBpool中获取连接，如果没有连接可以拿，就会被阻塞
 	public Connection takeConnect() throws InterruptedException {
+		// acquire()方法会将线程阻塞，直到拿到资源
 		useful.acquire();
 		Connection conn;
 

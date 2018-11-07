@@ -1,54 +1,83 @@
 package com.ntc.concurrent.part2.tools;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Exchanger;
+
+import com.ntc.concurrent.util.tool.LogTool;
+import com.ntc.concurrent.util.tool.SleepTools;
 
 /**
  * <h2>Exchange的使用</h2>
  * <ul>
- * <li>让一组线程达到某个屏障，被阻塞，直到组内最后一个线程达到屏障时，屏障开放，所有被阻塞的线程会继续运行（和CountDownLatch的主要区别）</li>
- * <li>CyclicBarrier放行由一组线程本身控制，放行条件=线程数</li>
- * <li>应用场景：多线程处理excel，当所有线程处理完毕后，再进行数据汇总</li>
+ * <li>仅限于两个线程之间的数据交换</li>
+ * <li>应用场景较少</li>
  * </ul>
+ * 
  * @author Michael-Chen
  */
 public class UseExchange {
-    private static final Exchanger<Set<String>> exchange 
-    	= new Exchanger<Set<String>>();
 
-    public static void main(String[] args) {
+	private static final Exchanger<Set<String>> exchange = new Exchanger<Set<String>>();
 
-    	//第一个线程
-        new Thread(new Runnable() {
-            public void run() {
-            	Set<String> setA = new HashSet<String>();//存放数据的容器
-                try {
-                	/*添加数据
-                	 * set.add(.....)
-                	 * */
-                	setA = exchange.exchange(setA);//交换set
-                	/*处理交换后的数据*/
-                } catch (InterruptedException e) {
-                }
-            }
-        }).start();
+	/**
+	 * @param args
+	 * @return
+	 * <pre>
+	 *[ Time = 1541511636213 ] ====>  setA add a.
+[ Time = 1541511636213 ] ====>  setB add b.
+[ Time = 1541511636214 ] ====>  setB is watting to exchange data.
+[ Time = 1541511638215 ] ====>  setA is watting to exchange data.
+[ Time = 1541511638215 ] ====>  setB : a
+[ Time = 1541511638215 ] ====>  setA : b
+	 * </pre>
+	 */
+	public static void main(String[] args) {
+		// 第一个线程
+		new Thread(new Runnable() {
+			public void run() {
+				Set<String> setA = new HashSet<String>();// 存放数据的容器
+				try {
+					System.out.println(LogTool.time() + " setA add a." );
+					setA.add("a");
+					
+					SleepTools.second(2);
+					
+					// 等待交换数据，会在此处阻塞
+					System.out.println(LogTool.time() + " setA is watting to exchange data." );
+					setA = exchange.exchange(setA);
+					
+					// 处理交换后的数据 
+					for (Iterator<String> iterator = setA.iterator(); iterator.hasNext();) {
+						String string = (String) iterator.next();
+						System.out.println(LogTool.time() + " setA : " + string);
+					}
+				} catch (InterruptedException e) {
+				}
+			}
+		}).start();
 
-      //第二个线程
-        new Thread(new Runnable() {
-            public void run() {
-            	Set<String> setB = new HashSet<String>();//存放数据的容器
-                try {
-                	/*添加数据
-                	 * set.add(.....)
-                	 * set.add(.....)
-                	 * */
-                	setB = exchange.exchange(setB);//交换set
-                	/*处理交换后的数据*/
-                } catch (InterruptedException e) {
-                }
-            }
-        }).start();
+		// 第二个线程
+		new Thread(new Runnable() {
+			public void run() {
+				Set<String> setB = new HashSet<String>();// 存放数据的容器
+				try {
+					System.out.println(LogTool.time() + " setB add b." );
+					setB.add("b");
+					// 等待交换数据，会在此处阻塞
+					System.out.println(LogTool.time() + " setB is watting to exchange data." );
+					setB = exchange.exchange(setB);
+					
+					// 处理交换后的数据 
+					for (Iterator<String> iterator = setB.iterator(); iterator.hasNext();) {
+						String string = (String) iterator.next();
+						System.out.println(LogTool.time() + " setB : " + string);
+					}
+				} catch (InterruptedException e) {
+				}
+			}
+		}).start();
 
-    }
+	}
 }
