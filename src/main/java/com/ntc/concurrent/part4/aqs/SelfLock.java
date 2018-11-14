@@ -16,14 +16,19 @@ public class SelfLock implements Lock {
 	// state == 0 表示当前没有线程拿到这个锁
 	private static class Sync extends AbstractQueuedSynchronizer {
 		
+		private static final long serialVersionUID = -7122233147197896190L;
+
 		// 判断当前线程是否是独占式的，直接返回  是否获取到锁
+		@Override
 		protected boolean isHeldExclusively() {
 			 return getState() == 1;
 		}
 		
 		// 试着去获取
+		@Override
 		protected boolean tryAcquire(int arg) {
 			// 使用CAS 设置当前state为获取到锁的状态，即getState() == 1
+			// 此锁为不可重入锁，当第一个线程拿到锁，state为1，当第二个线程再试着获取锁，state不会为0，造成死锁
 			if (compareAndSetState(0, 1)) {
 				// 如果设置成功，就将当前线程设置成独占线程
 				setExclusiveOwnerThread(Thread.currentThread());
@@ -33,6 +38,7 @@ public class SelfLock implements Lock {
 		}
 		
 		// 尝试去释放锁
+		@Override
 		protected boolean tryRelease(int arg) {
 			// 当状态为0，即没有线程获取到锁，即不需释放，此释放失败
 			if (getState() == 0) {
