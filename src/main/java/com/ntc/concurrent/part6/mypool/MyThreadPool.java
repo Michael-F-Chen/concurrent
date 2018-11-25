@@ -53,7 +53,7 @@ public class MyThreadPool {
         	workThreads[i].start();
         }
         
-        //  
+        //  获取机器的cpu核心数
         Runtime.getRuntime().availableProcessors();
     }
 
