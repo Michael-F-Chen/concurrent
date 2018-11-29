@@ -1,0 +1,36 @@
+package com.ntc.concurrent.part6.safeclass;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 存在着不安全的发布
+ * @author Michael-Chen
+ */
+public class UnsafePublish {
+	
+	// 要么用线程的容器替换
+	// 要么发布出去的时候，提供副本，深度拷贝
+	private List<Integer> list =  new ArrayList<>(3);
+	
+	public UnsafePublish() {
+		list.add(1);
+		list.add(2);
+		list.add(3);
+	}
+	
+	// 将list不安全的发布出去了
+	public List<Integer> getList() {
+		return list;
+	}
+
+	// 也是安全的,加了锁--------------------------------
+	public synchronized int getList(int index) {
+		return list.get(index);
+	}
+	
+	public synchronized void set(int index,int val) {
+		list.set(index,val);
+	}	
+	
+}

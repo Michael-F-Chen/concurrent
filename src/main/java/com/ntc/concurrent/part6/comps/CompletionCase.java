@@ -5,8 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 演示CompletionService异步获取并行任务执行结果
- * CompletionService让先完成任务的结果，先拿到
- * 自己实现的线程池，只能根据线程加入的顺序拿到执行结果
+ * CompletionService让先完成任务的结果，先拿到（拿到结果是有序的，单个批次内（cpu核心数的线程个数）执行时间少的在前面）
+ * 自己实现的线程池，只能根据线程加入的顺序拿到执行结果（拿到结果是无效的）
  * @author Michael-Chen
  */
 public class CompletionCase {
